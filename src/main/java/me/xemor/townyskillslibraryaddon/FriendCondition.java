@@ -1,9 +1,7 @@
 package me.xemor.townyskillslibraryaddon;
 
 import com.palmergames.bukkit.towny.TownyUniverse;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
-import com.palmergames.bukkit.towny.object.Town;
 import me.xemor.skillslibrary.conditions.Condition;
 import me.xemor.skillslibrary.conditions.TargetCondition;
 import org.bukkit.configuration.ConfigurationSection;
@@ -11,10 +9,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-//This has a bug where mayors are not counted as a resident seemingly
-public class TeammateCondition extends Condition implements TargetCondition {
+public class FriendCondition extends Condition implements TargetCondition {
 
-    public TeammateCondition(int condition, ConfigurationSection configurationSection) {
+    public FriendCondition(int condition, ConfigurationSection configurationSection) {
         super(condition, configurationSection);
     }
 
@@ -28,17 +25,8 @@ public class TeammateCondition extends Condition implements TargetCondition {
             if (resident1 == null || resident2 == null) {
                 return true;
             }
-            if (resident1.hasTown()) {
-                Town town = null;
-                try {
-                    town = resident1.getTown();
-                    return town.hasResident(resident2);
-                } catch (NotRegisteredException e) {
-                    e.printStackTrace();
-                }
-            }
+            return resident1.hasFriend(resident2);
         }
         return false;
     }
-
 }

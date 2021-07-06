@@ -15,6 +15,7 @@ public final class TownySkillsLibraryAddon extends JavaPlugin {
         Conditions.register("TOWNYFLAG", TownyFlagCondition.class);
         Conditions.register("TOWN", TownyCondition.class);
         Conditions.register("TEAMMATE", TeammateCondition.class);
+        Conditions.register("FRIEND", FriendCondition.class);
     }
 
     @Override
