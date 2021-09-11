@@ -2,11 +2,10 @@ package me.xemor.townyskillslibraryaddon;
 
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Resident;
-import me.xemor.skillslibrary.conditions.Condition;
-import me.xemor.skillslibrary.conditions.TargetCondition;
+import me.xemor.skillslibrary2.conditions.Condition;
+import me.xemor.skillslibrary2.conditions.TargetCondition;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 public class FriendCondition extends Condition implements TargetCondition {
@@ -16,12 +15,12 @@ public class FriendCondition extends Condition implements TargetCondition {
     }
 
     @Override
-    public boolean isTrue(LivingEntity livingEntity, Entity entity) {
-        if (livingEntity instanceof Player && entity instanceof Player) {
-            Player player = (Player) livingEntity;
-            Player target = (Player) entity;
+    public boolean isTrue(Entity entity, Entity target) {
+        if (entity instanceof Player && target instanceof Player) {
+            Player player = (Player) entity;
+            Player targetPlayer = (Player) target;
             Resident resident1 = TownyUniverse.getInstance().getResident(player.getUniqueId());
-            Resident resident2 = TownyUniverse.getInstance().getResident(target.getUniqueId());
+            Resident resident2 = TownyUniverse.getInstance().getResident(targetPlayer.getUniqueId());
             if (resident1 == null || resident2 == null) {
                 return true;
             }

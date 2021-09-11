@@ -2,20 +2,22 @@ package me.xemor.townyskillslibraryaddon;
 
 import com.palmergames.bukkit.towny.object.TownyPermission;
 import com.palmergames.bukkit.towny.utils.PlayerCacheUtil;
-import me.xemor.skillslibrary.conditions.BlockCondition;
-import me.xemor.skillslibrary.conditions.Condition;
-import me.xemor.skillslibrary.conditions.EntityCondition;
-import me.xemor.skillslibrary.conditions.TargetCondition;
-import org.bukkit.block.Block;
+import me.xemor.skillslibrary2.conditions.Condition;
+import me.xemor.skillslibrary2.conditions.EntityCondition;
+import me.xemor.skillslibrary2.conditions.LocationCondition;
+import me.xemor.skillslibrary2.conditions.TargetCondition;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+
 
 /**
  * A condition that checks that a player has the ability to perform four different actions: BUILD, DESTROY, ITEM_USE, SWITCH
  */
-public class TownyFlagCondition extends Condition implements EntityCondition, TargetCondition, BlockCondition {
+public class TownyFlagCondition extends Condition implements EntityCondition, TargetCondition, LocationCondition {
 
     TownyPermission.ActionType action;
 
@@ -30,23 +32,28 @@ public class TownyFlagCondition extends Condition implements EntityCondition, Ta
     }
 
     @Override
-    public boolean isTrue(LivingEntity livingEntity, Block block) {
-        if (livingEntity instanceof Player) {
-            return PlayerCacheUtil.getCachePermission((Player) livingEntity, block.getLocation(), block.getType(), TownyPermission.ActionType.BUILD);
+    public boolean isTrue(Entity entity, Location location) {
+        if (entity instanceof Player) {
+            World world = location.getWorld();
+            Material type = world.getBlockAt(location).getType();
+            return PlayerCacheUtil.getCachePermission((Player) entity, location, type, action);
         }
         return true;
     }
 
     @Override
-    public boolean isTrue(LivingEntity livingEntity) {
-        if (livingEntity instanceof Player) {
-            return PlayerCacheUtil.getCachePermission((Player) livingEntity, livingEntity.getLocation(), livingEntity.getLocation().getBlock().getType(), TownyPermission.ActionType.BUILD);
+    public boolean isTrue(Entity entity) {
+        if (entity instanceof Player) {
+            return PlayerCacheUtil.getCachePermission((Player) entity, entity.getLocation(), entity.getLocation().getBlock().getType(), TownyPermission.ActionType.BUILD);
         }
         return true;
     }
 
     @Override
-    public boolean isTrue(LivingEntity livingEntity, Entity entity) {
+    public boolean isTrue(Entity entity, Entity target) {
+        if (entity instanceof Player) {
+            return PlayerCacheUtil.getCachePermission((Player) entity, target.getLocation(), target.getLocation().getBlock().getType(), TownyPermission.ActionType.BUILD);
+        }
         return false;
     }
 }

@@ -1,7 +1,6 @@
 package me.xemor.townyskillslibraryaddon;
 
-import me.xemor.skillslibrary.SkillsLibrary;
-import me.xemor.skillslibrary.conditions.Conditions;
+import me.xemor.skillslibrary2.conditions.Conditions;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class TownySkillsLibraryAddon extends JavaPlugin {

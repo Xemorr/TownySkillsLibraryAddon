@@ -4,4 +4,4 @@ main: me.xemor.townyskillslibraryaddon.TownySkillsLibraryAddon
 api-version: 1.16
 authors: [ Xemor_ ]
 description: Adds Towny support to the SkillsLibrary
-depend: [SkillsLibrary, Towny]
+depend: [SkillsLibrary2, Towny]

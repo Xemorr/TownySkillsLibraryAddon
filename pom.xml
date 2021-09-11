@@ -6,7 +6,7 @@
 
     <groupId>me.xemor</groupId>
     <artifactId>TownySkillsLibraryAddon</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>TownySkillsLibraryAddon</name>
@@ -87,7 +87,7 @@
         <dependency>
             <groupId>me.xemor</groupId>
             <artifactId>SkillsLibrary</artifactId>
-            <version>1.1.5</version>
+            <version>2.2.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
