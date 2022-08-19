@@ -22,7 +22,7 @@ public class TeammateCondition extends Condition implements TargetCondition {
             Resident resident1 = TownyUniverse.getInstance().getResident(player.getUniqueId());
             Resident resident2 = TownyUniverse.getInstance().getResident(targetPlayer.getUniqueId());
             if (resident1 == null || resident2 == null) {
-                return true;
+                return false;
             }
             return CombatUtil.isSameTown(resident1, resident2);
         }

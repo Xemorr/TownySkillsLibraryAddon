@@ -19,7 +19,7 @@ import org.bukkit.entity.Player;
  */
 public class TownyFlagCondition extends Condition implements EntityCondition, TargetCondition, LocationCondition {
 
-    TownyPermission.ActionType action;
+    private TownyPermission.ActionType action;
 
     public TownyFlagCondition(int condition, ConfigurationSection configurationSection) {
         super(condition, configurationSection);
@@ -44,7 +44,7 @@ public class TownyFlagCondition extends Condition implements EntityCondition, Ta
     @Override
     public boolean isTrue(Entity entity) {
         if (entity instanceof Player) {
-            return PlayerCacheUtil.getCachePermission((Player) entity, entity.getLocation(), entity.getLocation().getBlock().getType(), TownyPermission.ActionType.BUILD);
+            return PlayerCacheUtil.getCachePermission((Player) entity, entity.getLocation(), entity.getLocation().getBlock().getType(), action);
         }
         return true;
     }
@@ -52,7 +52,7 @@ public class TownyFlagCondition extends Condition implements EntityCondition, Ta
     @Override
     public boolean isTrue(Entity entity, Entity target) {
         if (entity instanceof Player) {
-            return PlayerCacheUtil.getCachePermission((Player) entity, target.getLocation(), target.getLocation().getBlock().getType(), TownyPermission.ActionType.BUILD);
+            return PlayerCacheUtil.getCachePermission((Player) entity, target.getLocation(), target.getLocation().getBlock().getType(), action);
         }
         return false;
     }
